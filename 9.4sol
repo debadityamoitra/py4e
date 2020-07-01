@@ -1,0 +1,21 @@
+name = input("Enter file:")
+if len(name) < 1 : name = "mbox-short.txt"
+handle = open(name)
+counts=dict() 
+lst=list()
+for line in handle:
+    line=line.strip()
+    if line.startswith('From '):
+		word=line.split()
+		email=word[1]
+		lst.append(email)
+    else:continue
+for email in lst:
+	counts[email]=counts.get(email,0)+1
+mail=None
+counter=None
+for eid,count in counts.items():
+    if mail is None or count>counter:
+        mail=eid
+        counter=count
+print(mail,counter)        
